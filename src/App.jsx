@@ -55,13 +55,13 @@ export default function App() {
 
   return (
     <main>
-      <Recipe caption="Inspired by my mom. ",
-  difficulty="Easy",
+      {/* <Recipe caption="Inspired by my mom. "
+  difficulty="Easy"
   ingredients: ["Seaweed", "Rice", "Vegetables", "Sesame oil"],
   name="Kimbap",
   steps: ["Cook rice.", "Put on seaweed.", "Put veggies in.", "Roll in."],
   time: "3-5 minutes",
-  type: "Korean",
+  type: "Korean",></Recipe> */}
       <h1>Convex Chat</h1>
       <p className="badge">
         <span>{name}</span>
