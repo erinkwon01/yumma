@@ -7,13 +7,6 @@ function Recipe(props) {
     id, name, ingredients, time, caption, steps, difficulty, type
   } = props;
 
-  const displaySteps = (steps) => {
-    var counter = 0
-    steps.map((step) => {
-      <div>{counter+1}. {step}</div>
-    })
-  };
-
 //   const update = () => {
 //     updatePinned(id, !pinned);
 //   };
@@ -27,25 +20,21 @@ function Recipe(props) {
       <p>
         Estimated Time: {time}
         <br />
-        Ingredients:
-        {ingredients.map((i) => {
-            <div>i</div>
-        })}
+        Ingredients: {ingredients.map((ingredient, index) => <li key={index}>{ingredient}</li>)}
         <br />
         Difficulty: {difficulty}
         <br />
-        Steps: 
-        {displaySteps({steps})}
+        Steps: {steps.map((step, index) =>  <li key={index}>{index+1}. {step}</li>)} 
         <br />
-        Caption:
-        {caption}
+        Caption: {caption}
         <br />
         Type: {type}
       </p>
-      <button type="button" className={pinned ? styles.pinnedbutton : styles.button} onClick={update}>{pinned ? '❗️📌 UNPIN' : '📌 PIN' }</button>
     </div>
   );
 }
+
+//<button type="button" className={pinned ? styles.pinnedbutton : styles.button} onClick={update}>{pinned ? '❗️📌 UNPIN' : '📌 PIN' }</button>
 
 Recipe.propTypes = {
   id: PropTypes.string.isRequired,
