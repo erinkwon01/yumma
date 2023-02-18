@@ -8,9 +8,9 @@ function Recipe(props) {
   } = props;
 
   const displaySteps = (steps) => {
-    var counter = 1
+    var counter = 0
     steps.map((step) => {
-      <div>{counter}. {step}</div>
+      <div>{counter+1}. {step}</div>
     })
   };
 

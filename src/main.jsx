@@ -5,7 +5,7 @@ import App from "./App";
 import { ConvexProvider, ConvexReactClient } from "convex/react";
 
 // const address = import.meta.env.VITE_CONVEX_URL;
-const address = "https://neat-hummingbird-710.convex.cloud";
+const address = "https://secret-donkey-582.convex.cloud";
 
 const convex = new ConvexReactClient(address);
 

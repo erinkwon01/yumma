@@ -4,30 +4,30 @@ import Recipe from "./components/Recipe";
 import Modal from '@material-ui/core/Modal';
 
 export default function App() {
-  const messages = useQuery("listMessages") || [];
+  const messages = useQuery("listRecipes") || [];
 
-  const [newMessageText, setNewMessageText] = useState("");
-  const sendMessage = useMutation("sendMessage");
+  const [currentRecipe, setCurrentRecipe] = useState({
+    caption: '',
+    difficulty: '',
+    ingredients: '',
+    name: '',
+    steps:'',
+    time:'',
+    type: ''
+  });
+  const submitRecipe = useMutation("submitRecipe");
 
   const [name] = useState(() => "User " + Math.floor(Math.random() * 10000));
-  async function handleSendMessage(event) {
+  async function handleSubmitRecipe(event) {
     event.preventDefault();
-    setNewMessageText("");
-    await sendMessage(newMessageText, name);
+    await submitRecipe(currentRecipe.caption, currentRecipe.difficulty, currentRecipe.ingredients, 
+      currentRecipe.name, currentRecipe.steps, currentRecipe.time, currentRecipe.type, name);
+    setCurrentRecipe({caption: '', difficulty: '', ingredients: '', name: '', steps:'', time: '', type: ''}); 
   }
 
   const [isOpen, setIsOpen] = useState(false);
 
   // const recipes = useQuery("listRecipes"); 
-
-  // const [currentRecipe, setCurrentRecipe] = useState({
-  //   caption: '',
-  //   difficulty: '',
-  //   ingredients: '',
-  //   name: '',
-  //   steps:'',
-  //   time:''
-  // });
 
   // const makeRecipe = useMutation("sendRecipe"); 
 
@@ -75,13 +75,13 @@ export default function App() {
           </li>
         ))}
       </ul>
-      <form onSubmit={handleSendMessage}>
+      <form onSubmit={handleSubmitRecipe}>
         <input
-          value={newMessageText}
-          onChange={event => setNewMessageText(event.target.value)}
+          value={currentRecipe.name}
+          onChange={event => setCurrentRecipe(x => ({ ...x, name: event.target.value}))}
           placeholder="Write a message…"
         />
-        <input type="submit" value="Send" disabled={!newMessageText} />
+        <input type="submit" value="Send" disabled={false} /> {/*when should the button be disabled, is there a name, ingredients, etc.*/}
       </form>
       <button onClick={setIsOpen}>Open Modal</button>
       <Modal 
