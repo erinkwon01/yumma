@@ -37,35 +37,54 @@ export default function App() {
     handler={event => setCurrentRecipe(x => {
       x.ingredients[0] = event.target.value;
       return x;
-      // ({ ...x, ingredients: event.target.value})}
     })
       }
     placeholder="Ingredient"/>
    ])
+
+   const [stepInputs, setStepInputs] = useState ([<IngredientInput id={0} 
+    value={currentRecipe.steps[0]}
+    handler={event => setCurrentRecipe(x => {
+      x.steps[0] = event.target.value;
+      return x;
+    })}
+    placeholder="Steps to Make Dish"/>
+   ])
+
+   const addStep = () => {
+    var newSteps = [...stepInputs];
+    const index = newSteps.length;
+    newSteps.push(<IngredientInput id={index}
+      value={currentRecipe.steps[index]}
+      handler={event => {
+        event.preventDefault();
+        setCurrentRecipe(x => {
+          x.steps[index] = event.target.value;
+          return x;
+        });
+      }}
+      placeholder="Steps to Make Dish" />)
+    setStepInputs(newSteps);
+   }
+
   // useState([<input value={currentRecipe.ingredients}
   //   onChange={event => setCurrentRecipe(x => ({ ...x, ingredients: event.target.value}))}
   //   placeholder="Ingredients"
   // />])
   const addIngredient = () => {
-    var newIngredients = [...ingredientInputs]
+    var newIngredients = [...ingredientInputs];
     const index = newIngredients.length;
     newIngredients.push(<IngredientInput id={index}
       value={currentRecipe.ingredients[index]} 
-      //currentRecipe.ingredients.push(event.target.value)
       handler={event => {
         event.preventDefault();
         setCurrentRecipe(x => {
-          x.ingredients[index] = event.target.value
-          console.log(x)
+          x.ingredients[index] = event.target.value;
+          console.log(x);
           return x;
-          // ({ ...x, ingredients: ["sushi!"]})
           });
       }}
       placeholder="Ingredient"/>)
-    // newIngredients.push(<input value={currentRecipe.ingredients}
-    //   onChange={event => setCurrentRecipe(x => ({ ...x, ingredients: event.target.value}))}
-    //   placeholder="Ingredients"
-    // />)
     setIngredientInputs(newIngredients)
   }
 
@@ -76,9 +95,6 @@ export default function App() {
   return (
     <main>
       <h1>YUMMA ♡</h1>
-      {/* <p className="badge">
-        <span>{name}</span>
-      </p> */}
       <ul>
           {recipes.map((recipe) => (
               <Recipe id={recipe._id.toString()} name={recipe.name} caption={recipe.caption} difficulty={recipe.difficulty} ingredients={recipe.ingredients} 
@@ -97,27 +113,23 @@ export default function App() {
           onChange={event => setCurrentRecipe(x => ({ ...x, time: event.target.value}))}
           placeholder="Estimated Time"
         />
-        {/* <input
-          value={currentRecipe.ingredients}
-          onChange={event => setCurrentRecipe(x => ({ ...x, ingredients: event.target.value}))}
-          placeholder="Ingredients"
-        /> */}
         {ingredientInputs.map((i) => {return i})}
         <button sx={{width: "40px", height: "20px"}} onClick={(event) => {
           event.stopPropagation();
           event.preventDefault();
           addIngredient();
-          }}>add ingredient</button>
+          }}>Add Ingredient</button>
         <input
           value={currentRecipe.difficulty}
           onChange={event => setCurrentRecipe(x => ({ ...x, difficulty: event.target.value}))}
           placeholder="Difficulty"
         />
-        <input
-          value={currentRecipe.steps}
-          onChange={event => setCurrentRecipe(x => ({ ...x, steps: event.target.value}))}
-          placeholder="Steps to Make Dish"
-        />
+        {stepInputs.map((i) => {return i})}
+        <button sx={{width: "40px", height: "20px"}} onClick={(event) => {
+          event.stopPropagation();
+          event.preventDefault();
+          addStep();
+          }}>Add Step</button>
         <input
           value={currentRecipe.caption}
           onChange={event => setCurrentRecipe(x => ({ ...x, caption: event.target.value}))}
