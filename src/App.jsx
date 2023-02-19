@@ -3,6 +3,7 @@ import { useMutation, useQuery } from "../convex/_generated/react";
 import Recipe from "./components/Recipe";
 import Modal from '@material-ui/core/Modal';
 import IngredientInput from "./components/IngredientInput";
+import { borderRadius } from "@mui/system";
 
 export default function App() {
   const recipes = useQuery("listRecipes") || [];
@@ -103,29 +104,40 @@ export default function App() {
       </ul>
       <button onClick={setIsOpen}>Upload Recipe</button>
       <Modal 
-      open = {isOpen}
+        // style={{ 
+        //   backgroundColor: '#8E5134',
+        //   maxHeight: '80%',
+        //   maxWidth: '40%',
+        //   overflow: 'scroll',
+        //   borderRadius: '10px',
+        //   justifySelf: "center"
+        //    }}
+        open = {isOpen}
       >
           <form onSubmit={handleSubmitRecipe}>
+          <h2>Submit a Recipe</h2>
         <input
           value={currentRecipe.name}
           onChange={event => setCurrentRecipe(x => ({ ...x, name: event.target.value}))}
           placeholder="Name"
         />
+        <br></br>
         <input
           value={currentRecipe.time}
           onChange={event => setCurrentRecipe(x => ({ ...x, time: event.target.value}))}
           placeholder="Estimated Time"
         />
-        <br/>
+        <label>Ingredients</label>
         {ingredientInputs.map((i) => {return i})}
-        <br/>
         <button sx={{width: "40px", height: "20px"}} onClick={(event) => {
           event.stopPropagation();
           event.preventDefault();
           addIngredient();
           }}>Add Ingredient</button>
           <br/>
+        <label for="difficulty">Difficulty Level</label>
         <input
+          id = "difficulty"
           value={currentRecipe.difficulty}
           onChange={event => setCurrentRecipe(x => ({ ...x, difficulty: event.target.value}))}
           placeholder="Difficulty"
@@ -136,26 +148,30 @@ export default function App() {
           event.preventDefault();
           addStep();
           }}>Add Step</button>
+        <label for="caption">Caption</label>
         <input
+          id = "caption"
           value={currentRecipe.caption}
           onChange={event => setCurrentRecipe(x => ({ ...x, caption: event.target.value}))}
           placeholder="Share your story"
         />
+        <br></br>
+        <label for="type">Type</label>
         <input
+          id = "type"
           value={currentRecipe.type}
           onChange={event => setCurrentRecipe(x => ({ ...x, type: event.target.value}))}
-          placeholder="Type"
+          placeholder="ex. Vietnamese"
         />
+        <br></br>
         <input type="submit" value="Send" disabled={ currentRecipe.name === '' || currentRecipe.time === '' || currentRecipe.ingredients === '' || currentRecipe.difficulty === '' 
           || currentRecipe.steps === '' || currentRecipe.caption === '' || currentRecipe.type === '' } 
           onClick = {handleClose}/>
+        <input type="submit" value="Cancel"
+          onClick = {handleClose}/>
       </form>
-      </Modal>
-      {/* <Modal 
-      open = {isOpen}
-      >
-        <button sx={{width: "40px", height: "20px"}} onClick={handleClose}>close </button>
-      </Modal> */}
+      </Modal >
+      {}
     </main>
   );
 }
