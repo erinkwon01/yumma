@@ -24,14 +24,13 @@ h1 {
   font-size: 1.8em;
   font-weight: 500;
 }
-h2{
-  font-family: 'Verdana';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 24px;
-  line-height: 32px;
-  color: #EBE4D1;
-  margin-bottom: 2ex;
+
+.recipe {
+  background-color: #FFF9ED;
+  border-radius: 10%;
+  margin-right: 7%;
+  margin-left: 5%;
+  padding: 3%;
 }
 
 .badge {
@@ -50,8 +49,8 @@ h2{
 ul {
   margin: 8px;
   border-radius: 8px;
-  border: solid 1px lightgray;
-  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  /* border: solid 1px lightgray; */
+  /* box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075); */
 }
 
 ul:empty {
@@ -62,35 +61,34 @@ li {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding: 8px 16px 8px 16px;
-  border-bottom: solid 1px lightgray;
+  padding: 8px 16px 8px 25px;
   font-size: 16px;
 }
 
 li:last-child {
   border: 0;
-}
+} 
 
-li span:nth-child(1) {
+/* li span:nth-child(1) {
   display: flex;
   justify-content: center;
   font-weight: bold;
   font-size: 25px;
   margin-right: 4px;
   white-space: nowrap;
-}
-li span:nth-child(2) {
+} */
+/* li span:nth-child(2) {
   display: flex;
   color: 'gray';
   justify-content: flex-end;
   margin-right: 4px;
   word-break: break-word;
-}
-li span:nth-child(3) {
+} */
+/* li span:nth-child(3) {
   color: #6c757d;
   margin-left: auto;
   white-space: nowrap;
-}
+} */
 
 form {
   content: "\a";

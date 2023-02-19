@@ -10,6 +10,8 @@
     "dev:init": "convex dev --once"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
     "@material-ui/core": "^4.12.4",
     "@mui/material": "^5.11.9",
     "convex": "0.9.1",
