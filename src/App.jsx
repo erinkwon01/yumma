@@ -98,7 +98,7 @@ export default function App() {
 
   return (
     <div style={{
-      backgroundColor: '#5C4033',
+      backgroundColor: '#42270D',
     }}>
       <main style={{backgroundColor: '#8E9B90',}}>
         <div style={{
