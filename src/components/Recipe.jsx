@@ -10,7 +10,7 @@ function Recipe(props) {
 //   const update = () => {
 //     updatePinned(id, !pinned);
 //   };
-
+  console.log(ingredients);
   return (
     // <div className={pinned ? styles.pinnedmessage : styles.message}>
     <div key={id}>
@@ -24,7 +24,7 @@ function Recipe(props) {
         <br />
         Difficulty: {difficulty}
         <br />
-        Steps: {steps.map((step, index) =>  <li key={index}>{index+1}. {step}</li>)} 
+        Steps: {steps.map((step, index) =>  <li key={"step" + index}>{index+1}. {step}</li>)} 
         <br />
         Caption: {caption}
         <br />

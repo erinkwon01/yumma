@@ -8,6 +8,7 @@ export default function IngredientInput(props){
     return (
         <div>
         <input
+          key={id}
           value={value}
           onChange={handler}
           placeholder={placeholder}
