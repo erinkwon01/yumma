@@ -14,9 +14,9 @@ function Recipe(props) {
   return (
     // <div className={pinned ? styles.pinnedmessage : styles.message}>
     <div key={id}>
-      <h5>
+      <h1>
         {name}
-      </h5>
+      </h1>
       <p>
         Estimated Time: {time}
         <br />
@@ -30,6 +30,7 @@ function Recipe(props) {
         <br />
         Type: {type}
       </p>
+      <br />
     </div>
   );
 }
