@@ -102,7 +102,10 @@ export default function App() {
           ))}
       </ul>
       <button onClick={setIsOpen}>Upload Recipe</button>
-      <form onSubmit={handleSubmitRecipe}>
+      <Modal 
+      open = {isOpen}
+      >
+          <form onSubmit={handleSubmitRecipe}>
         <input
           value={currentRecipe.name}
           onChange={event => setCurrentRecipe(x => ({ ...x, name: event.target.value}))}
@@ -113,12 +116,15 @@ export default function App() {
           onChange={event => setCurrentRecipe(x => ({ ...x, time: event.target.value}))}
           placeholder="Estimated Time"
         />
+        <br/>
         {ingredientInputs.map((i) => {return i})}
+        <br/>
         <button sx={{width: "40px", height: "20px"}} onClick={(event) => {
           event.stopPropagation();
           event.preventDefault();
           addIngredient();
           }}>Add Ingredient</button>
+          <br/>
         <input
           value={currentRecipe.difficulty}
           onChange={event => setCurrentRecipe(x => ({ ...x, difficulty: event.target.value}))}
@@ -144,16 +150,12 @@ export default function App() {
           || currentRecipe.steps === '' || currentRecipe.caption === '' || currentRecipe.type === '' } 
           onClick = {handleClose}/>
       </form>
-      <Modal 
-      open = {isOpen}
-      >
-        <input />
       </Modal>
-      <Modal 
+      {/* <Modal 
       open = {isOpen}
       >
         <button sx={{width: "40px", height: "20px"}} onClick={handleClose}>close </button>
-      </Modal>
+      </Modal> */}
     </main>
   );
 }
