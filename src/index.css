@@ -37,6 +37,65 @@ h1 {
   padding: 4px 8px 4px 8px;
   font-size: 0.75em; */
 }
+ 
+/* .ingredients-title-box {
+  position: absolute;
+  width: 463px;
+  height: 59px;
+  left: 777px;
+  top: 51px;
+  order: 0;
+  z-index: -1;
+}
+
+.ingredients-title {
+  
+
+} */
+
+/*
+.ingredients-list-outer-box {
+  position: absolute;
+  width: 351px;
+  height: 577px;
+  left: 904px;
+  top: 65px;
+  z-index: 0;
+
+  background: #D2A26C;
+  border-radius: 10px;
+}
+
+.ingredients-list-inner-box {
+  position: absolute;
+  width: 329px;
+  height: 482px;
+  left: 914.52px;
+  top: 145px;
+  z-index: 1;
+
+  background: #EFD6BA;
+}
+
+.ingredients-list {
+  position: absolute;
+  width: 284px;
+  height: 460px;
+  left: 940.52px;
+  top: 163px;
+  z-index: 2;
+
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+
+
+  letter-spacing: 0.5px;
+
+  color: #000000;
+} */
 
 ul {
   margin: 8px;

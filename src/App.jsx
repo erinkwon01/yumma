@@ -6,6 +6,7 @@ import IngredientInput from "./components/IngredientInput";
 
 export default function App() {
   const recipes = useQuery("listRecipes") || [];
+  console.log(recipes);
 
   const [currentRecipe, setCurrentRecipe] = useState({
     caption: '',
