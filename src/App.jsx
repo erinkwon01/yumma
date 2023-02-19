@@ -2,10 +2,10 @@ import { useState } from "react";
 import { useMutation, useQuery } from "../convex/_generated/react";
 import Recipe from "./components/Recipe";
 import Modal from '@material-ui/core/Modal';
+import IngredientInput from "./components/IngredientInput";
 
 export default function App() {
   const recipes = useQuery("listRecipes") || [];
-  // console.log(recipes);
 
   const [currentRecipe, setCurrentRecipe] = useState({
     caption: '',
@@ -28,50 +28,47 @@ export default function App() {
 
   const [isOpen, setIsOpen] = useState(false);
 
-  // const recipes = useQuery("listRecipes"); 
-
-  // const makeRecipe = useMutation("sendRecipe"); 
-
-  // function onUploadClick(){
-
-  // }
-
-  // async function handleSubmitRecipe(event){
-  //   event.preventDefault(); 
-  //   setCurrentRecipe({
-  //     caption: "",
-  //     difficulty: "",
-  //     ingredients: "",
-  //     name: "",
-  //     steps:"",
-  //     time:"",
-  //   })
-  //   await makeRecipe(currentRecipe);
-  //   console.log(currentRecipe);
-  // }
+  const [ingredients, setIngredients] = useState ([<IngredientInput id={0}
+    value={currentRecipe.ingredients} 
+    handler={event => setCurrentRecipe(x => ({ ...x, ingredients: event.target.value}))}
+    placeholder="Ingredient"/>
+   ])
+  // useState([<input value={currentRecipe.ingredients}
+  //   onChange={event => setCurrentRecipe(x => ({ ...x, ingredients: event.target.value}))}
+  //   placeholder="Ingredients"
+  // />])
+  const addIngredient = () => {
+    var newIngredients = [...ingredients]
+    newIngredients.push(<IngredientInput id={newIngredients.length}
+      value={currentRecipe.ingredients} 
+      handler={event => setCurrentRecipe(x => ({ ...x, ingredients: event.target.value}))}
+      placeholder="Ingredient"/>)
+    // newIngredients.push(<input value={currentRecipe.ingredients}
+    //   onChange={event => setCurrentRecipe(x => ({ ...x, ingredients: event.target.value}))}
+    //   placeholder="Ingredients"
+    // />)
+    setIngredients(newIngredients)
+  }
 
   function handleClose(){
-    setIsOpen(!IsOpen);
+    setIsOpen(!isOpen);
   }
 
   return (
     <main>
-      {/* <Recipe id='1234567' caption="Inspired by my mom. " difficulty="Easy" ingredients={["Seaweed", "Rice", "Vegetables", "Sesame oil"]} name="Kimbap"
-      steps={["Cook rice.", "Put on seaweed.", "Put veggies in.", "Roll in."]} time="3-5 minutes" type="Korean" /> */}
-      <h1>Convex Chat</h1>
-      <p className="badge">
+      <h1>YUMMA ♡</h1>
+      {/* <p className="badge">
         <span>{name}</span>
-      </p>
-      {/* Replace below with Galen's recipe component */}
+      </p> */}
       <ul>
         <li>
           {recipes.map((recipe) => (
-            <Recipe id={recipe._id.toString()} name={recipe.name} caption={recipe.caption} difficulty={recipe.difficulty} ingredients={recipe.ingredients} 
+              <Recipe id={recipe._id.toString()} name={recipe.name} caption={recipe.caption} difficulty={recipe.difficulty} ingredients={recipe.ingredients} 
             steps={recipe.steps} time={recipe.time} type={recipe.type} />
           ))}
         </li>
       </ul>
-      {/* Replace above with Galen's recipe component */}
+      <button onClick={setIsOpen}>Upload Recipe</button>
       <form onSubmit={handleSubmitRecipe}>
         <input
           value={currentRecipe.name}
@@ -83,11 +80,13 @@ export default function App() {
           onChange={event => setCurrentRecipe(x => ({ ...x, time: event.target.value}))}
           placeholder="Estimated Time"
         />
-        <input
+        {/* <input
           value={currentRecipe.ingredients}
           onChange={event => setCurrentRecipe(x => ({ ...x, ingredients: event.target.value}))}
           placeholder="Ingredients"
-        />
+        /> */}
+        {ingredients.map((i) => {return i})}
+        <button sx={{width: "40px", height: "20px"}} onClick={() => addIngredient()}>add ingredient</button>
         <input
           value={currentRecipe.difficulty}
           onChange={event => setCurrentRecipe(x => ({ ...x, difficulty: event.target.value}))}
@@ -109,13 +108,18 @@ export default function App() {
           placeholder="Type"
         />
         <input type="submit" value="Send" disabled={ currentRecipe.name === '' || currentRecipe.time === '' || currentRecipe.ingredients === '' || currentRecipe.difficulty === '' 
-          || currentRecipe.steps === '' || currentRecipe.caption === '' || currentRecipe.type === '' } />
+          || currentRecipe.steps === '' || currentRecipe.caption === '' || currentRecipe.type === '' } 
+          onClick = {handleClose}/>
       </form>
-      <button onClick={setIsOpen}>Open Modal</button>
       <Modal 
       open = {isOpen}
       >
-          <input></input>
+        <input />
+      </Modal>
+      <Modal 
+      open = {isOpen}
+      >
+        <button sx={{width: "40px", height: "20px"}} onClick={handleClose}>close </button>
       </Modal>
     </main>
   );
