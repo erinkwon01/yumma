@@ -28,6 +28,7 @@ export default function App() {
     setCurrentRecipe({caption: '', difficulty: '', ingredients: [], name: '', steps:[], time: '', type: ''});
   }
 
+
   const [isOpen, setIsOpen] = useState(false);
 
   // TODO: prevent submit handler getting called
@@ -90,6 +91,9 @@ export default function App() {
   function handleClose(){
     setIsOpen(!isOpen);
   }
+  
+  useEffect(() => {
+  }, [setCurrentRecipe]);
 
   useEffect(() => {
   }, [setCurrentRecipe]);
