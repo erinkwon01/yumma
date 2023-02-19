@@ -1,15 +1,13 @@
-import { useState } from "react";
+import { useState , useEffect} from "react";
 import { useMutation, useQuery } from "../convex/_generated/react";
 import Recipe from "./components/Recipe";
 import Modal from '@material-ui/core/Modal';
 import IngredientInput from "./components/IngredientInput";
 import logo from "./logo.png";
-import { borderRadius } from "@mui/system";
 
 export default function App() {
   
   const recipes = useQuery("listRecipes") || [];
-  console.log(recipes);
 
   const [currentRecipe, setCurrentRecipe] = useState({
     caption: '',
@@ -21,21 +19,19 @@ export default function App() {
     type: ''
   });
   const submitRecipe = useMutation("submitRecipe");
-  console.log(currentRecipe);
 
   const [name] = useState(() => "User " + Math.floor(Math.random() * 10000));
   async function handleSubmitRecipe(event) {
     event.preventDefault();
     await submitRecipe(currentRecipe.caption, currentRecipe.difficulty, currentRecipe.ingredients, 
       currentRecipe.name, currentRecipe.steps, currentRecipe.time, currentRecipe.type, name);
-    setCurrentRecipe({caption: '', difficulty: '', ingredients: [], name: '', steps:[], time: '', type: ''}); 
+    setCurrentRecipe({caption: '', difficulty: '', ingredients: [], name: '', steps:[], time: '', type: ''});
   }
 
   const [isOpen, setIsOpen] = useState(false);
 
   // TODO: prevent submit handler getting called
 
-  console.log(currentRecipe);
   const [ingredientInputs, setIngredientInputs] = useState ([<IngredientInput id={0}
     value={currentRecipe.ingredients[0]} 
     handler={event => setCurrentRecipe(x => {
@@ -84,7 +80,6 @@ export default function App() {
         event.preventDefault();
         setCurrentRecipe(x => {
           x.ingredients[index] = event.target.value;
-          console.log(x);
           return x;
           });
       }}
@@ -95,6 +90,9 @@ export default function App() {
   function handleClose(){
     setIsOpen(!isOpen);
   }
+
+  useEffect(() => {
+  }, [setCurrentRecipe]);
 
   return (
     <div style={{
@@ -111,7 +109,7 @@ export default function App() {
           display: 'flex',
           justifyContent: 'center'
         }}>
-          <button onClick={setIsOpen} style={{
+          <button onClick={handleClose} style={{
             fontFamily: 'Manrope',
             marginTop: '10px',
             marginBottom: '0px',
@@ -130,7 +128,16 @@ export default function App() {
               }}
             open = {isOpen}
           >
-              <form onSubmit={handleSubmitRecipe}>
+              <form>
+              <button style = {{
+                marginTop: '8px',
+                marginLeft: '-26px',
+                marginBottom: '-2px',
+                backgroundColor: '#752711',
+              }}
+                onClick ={handleClose}>
+                x
+              </button>
               <h2 style={{
                 color: 'white',
               }}>Submit a Recipe</h2>
@@ -185,9 +192,9 @@ export default function App() {
               placeholder="ex. Vietnamese"
             />
             <br></br>
-            <input type="submit" value="Send" disabled={ currentRecipe.name === '' || currentRecipe.time === '' || currentRecipe.ingredients === '' || currentRecipe.difficulty === '' 
+            <input type="submit" value="Submit" disabled={ currentRecipe.name === '' || currentRecipe.time === '' || currentRecipe.ingredients === '' || currentRecipe.difficulty === '' 
               || currentRecipe.steps === '' || currentRecipe.caption === '' || currentRecipe.type === '' } 
-              onClick = {handleClose}/>
+              onClick = {handleSubmitRecipe}/>
             <input type="submit" value="Cancel"
               onClick = {handleClose}/>
           </form>
